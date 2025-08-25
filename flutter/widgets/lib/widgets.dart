@@ -7,6 +7,13 @@
 
 import 'widgets_platform_interface.dart';
 
+export 'src/widgets/mechanix_check_box.dart';
+export 'src/widgets/mechanix_elevated_button.dart';
+export 'src/widgets/mechanix_alert_dialog.dart';
+export 'src/widgets/mechanix_bottom_alert.dart';
+export 'src/widgets/mechanix_outline_button.dart';
+export 'src/widgets/mechanix_text_button.dart';
+
 class Widgets {
   Future<String?> getPlatformVersion() {
     return WidgetsPlatform.instance.getPlatformVersion();
