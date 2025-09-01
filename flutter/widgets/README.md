@@ -17,3 +17,9 @@ Make sure you have the following installed:
 
 To try out the example project, navigate to the `/example` directory and run:  
 
+basic principles - 
+
+customization
+extensibility
+ease of use 
+0 % configuration

@@ -8,9 +8,11 @@ environment:
   flutter: '>=3.3.0'
 
 dependencies:
+  collection: ^1.19.1
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
+  watch_it: ^1.7.0
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +44,10 @@ flutter:
       some_platform:
         pluginClass: somePluginClass
     # -------------------
+
+  assets:
+    - assets/icons/right-caret.png
+    - assets/icons/wifi.png
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widgets/widgets.dart';
 import 'example_page_items.dart';
 
 class Example extends StatelessWidget {
@@ -20,25 +21,41 @@ class _MasterDetailPage extends StatefulWidget {
 }
 
 class _MasterDetailPageState extends State<_MasterDetailPage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 3;
 
   @override
   Widget build(BuildContext context) {
-    final isWide = MediaQuery.of(context).size.width > 600;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth > 600;
 
-    if (isWide) {
-      /// Desktop / tablet → side by side
-      return Row(
-        children: [
-          _buildSidebar(context),
-          const VerticalDivider(width: 1, thickness: 1),
-          Expanded(child: _buildDetailScaffold(context, showDrawer: false)),
-        ],
-      );
-    } else {
-      /// Mobile → sidebar as drawer
-      return _buildDetailScaffold(context, showDrawer: true);
-    }
+        if (isWide) {
+          /// Desktop / tablet → side by side
+          return Scaffold(
+            body: Row(
+              children: [
+                // Sidebar column with icon at top
+                Column(
+                  children: [
+                    ThemeToggleButton(),
+                    Expanded( // ← Give the sidebar expanded height
+                      child: _buildSidebar(context),
+                    ),
+                  ],
+                ),
+                const VerticalDivider(width: 1, thickness: 1),
+                Expanded(
+                  child: _buildDetailScaffold(context, showDrawer: false),
+                ),
+              ],
+            ),
+          );
+        } else {
+          /// Mobile → sidebar as drawer
+          return _buildDetailScaffold(context, showDrawer: true);
+        }
+      },
+    );
   }
 
   Widget _buildSidebar(BuildContext context) {
