@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:widgets_example/pages/alerts_page.dart';
 import 'package:widgets_example/pages/buttons_page.dart';
+import 'package:widgets_example/pages/menu_page.dart';
 
 import 'pages/checkbox_page.dart';
 
@@ -43,8 +44,13 @@ final examplePageItems = <PageItem>[
       iconBuilder: (context, selected) =>
           const Icon(Icons.radio_button_checked)),
   PageItem(
-      title: 'MechanixAlerts',
-      pageBuilder: (context) => const AlertsPage(),
+    title: 'MechanixAlerts',
+    pageBuilder: (context) => const AlertsPage(),
+    iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
+  ),
+  PageItem(
+      title: 'MechanixSettingsMenu',
+      pageBuilder: (context) => const MechanixSettingsMenuPage(),
       iconBuilder: (context, selected) =>
-          const Icon(Icons.smart_screen_rounded)),
+          const Icon(Icons.smart_screen_rounded))
 ].sortedBy((page) => page.title);
