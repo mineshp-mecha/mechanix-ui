@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:widgets/widgets.dart';
+
 import 'example_page_items.dart';
 
 class Example extends StatelessWidget {
@@ -38,7 +39,8 @@ class _MasterDetailPageState extends State<_MasterDetailPage> {
                 Column(
                   children: [
                     ThemeToggleButton(),
-                    Expanded( // ← Give the sidebar expanded height
+                    Expanded(
+                      // ← Give the sidebar expanded height
                       child: _buildSidebar(context),
                     ),
                   ],

@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
 
-class SectionListType {
-  SectionListType(
-      {this.title,
-      required this.sectionListItems,
-      this.backGroundColor,
-      this.titleTextStyle,
-      this.dividerThickness,
-      this.dividerHeight,
-      this.dividerColor,
-      this.divider,
-      this.isDividerRequired = false});
+// class SectionListType {
+//   SectionListType(
+//       {this.title,
+//       required this.sectionListItems,
+//       this.backGroundColor,
+//       this.titleTextStyle,
+//       this.dividerThickness,
+//       this.dividerHeight,
+//       this.dividerColor,
+//       this.divider,
+//       this.splashColor,
+//       this.isDividerRequired = false});
 
-  final String? title;
+//   final String? title;
 
-  final Color? backGroundColor;
+//   final Color? backGroundColor;
 
-  final TextStyle? titleTextStyle;
+//   final TextStyle? titleTextStyle;
 
-  final TextStyle? dividerThickness;
+//   final TextStyle? dividerThickness;
 
-  final TextStyle? dividerHeight;
+//   final TextStyle? dividerHeight;
 
-  final TextStyle? dividerColor;
+//   final TextStyle? dividerColor;
 
-  final bool isDividerRequired;
+//   final bool isDividerRequired;
 
-  final Widget? divider;
+//   final Widget? divider;
 
-  final List<SectionListItemsType> sectionListItems;
-}
+//   final List<SectionListItemsType> sectionListItems;
+
+//   final Color? splashColor;
+// }
 
 class SectionListItemsType {
   SectionListItemsType({

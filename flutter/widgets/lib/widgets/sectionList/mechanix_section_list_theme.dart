@@ -1,24 +1,39 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
 class MechanixSectionListThemeData
     extends ThemeExtension<MechanixSectionListThemeData> with Diagnosticable {
-  const MechanixSectionListThemeData({
-    this.backgroundColor,
-    this.titleTextStyle,
-  });
+  const MechanixSectionListThemeData(
+      {this.backgroundColor,
+      this.titleTextStyle,
+      this.dividerThickness = 1,
+      this.dividerHeight = 1,
+      this.dividerColor});
 
   final WidgetStateProperty<Color?>? backgroundColor;
   final TextStyle? titleTextStyle;
+  final double? dividerThickness;
+  final double? dividerHeight;
+  final Color? dividerColor;
 
   @override
-  MechanixSectionListThemeData copyWith(
-      {WidgetStateProperty<Color?>? backgroundColor,
-      TextStyle? titleTextStyle}) {
+  MechanixSectionListThemeData copyWith({
+    WidgetStateProperty<Color?>? backgroundColor,
+    TextStyle? titleTextStyle,
+    double? dividerThickness,
+    double? dividerHeight,
+    Color? dividerColor,
+  }) {
     return MechanixSectionListThemeData(
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        titleTextStyle: titleTextStyle ?? this.titleTextStyle);
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+      dividerThickness: dividerThickness ?? this.dividerThickness,
+      dividerHeight: dividerHeight ?? this.dividerHeight,
+      dividerColor: dividerColor ?? this.dividerColor,
+    );
   }
 
   @override
@@ -26,9 +41,13 @@ class MechanixSectionListThemeData
       ThemeExtension<MechanixSectionListThemeData>? other, double t) {
     final o = other as MechanixSectionListThemeData?;
     return MechanixSectionListThemeData(
-        backgroundColor: WidgetStateProperty.lerp<Color?>(
-            backgroundColor, o?.backgroundColor, t, Color.lerp),
-        titleTextStyle: TextStyle.lerp(titleTextStyle, o?.titleTextStyle, t));
+      backgroundColor: WidgetStateProperty.lerp<Color?>(
+          backgroundColor, o?.backgroundColor, t, Color.lerp),
+      titleTextStyle: TextStyle.lerp(titleTextStyle, o?.titleTextStyle, t),
+      dividerThickness: lerpDouble(dividerThickness, o?.dividerThickness, t),
+      dividerHeight: lerpDouble(dividerHeight, o?.dividerThickness, t),
+      dividerColor: Color.lerp(dividerColor, o?.dividerColor, t),
+    );
   }
 
   @override
@@ -50,18 +69,6 @@ class MechanixSectionListThemeData
   int get hashCode {
     return Object.hash(backgroundColor, titleTextStyle);
   }
-
-  // Convenience getter to create TextStyle from theme properties
-  // TextStyle getTextStyle(Set<WidgetState> states) {
-  //   return TextStyle(
-  //     color: color?.resolve(states),
-  //     fontSize: size?.resolve(states),
-  //     fontWeight: weight?.resolve(states),
-  //     fontVariations: fontVariation?.resolve(states) != null
-  //         ? [fontVariation!.resolve(states)!]
-  //         : null,
-  //   );
-  // }
 }
 
 class MechanixSectionListTheme extends InheritedTheme {
@@ -94,84 +101,3 @@ class MechanixSectionListTheme extends InheritedTheme {
     return data != oldWidget.data;
   }
 }
-
-// // Example usage with helper methods for common states
-// extension MechanixSectionListThemeDataExtension
-//     on MechanixSectionListThemeData {
-//   // Helper methods for common widget states
-//   TextStyle get defaultTextStyle => getTextStyle({});
-//   TextStyle get hoveredTextStyle => getTextStyle({WidgetState.hovered});
-//   TextStyle get pressedTextStyle => getTextStyle({WidgetState.pressed});
-//   TextStyle get disabledTextStyle => getTextStyle({WidgetState.disabled});
-//   TextStyle get selectedTextStyle => getTextStyle({WidgetState.selected});
-// }
-
-// // Example widget using the theme
-// class MechanixSectionListItem extends StatefulWidget {
-//   const MechanixSectionListItem({
-//     super.key,
-//     required this.title,
-//     this.subtitle,
-//     this.onTap,
-//     this.isSelected = false,
-//   });
-
-//   final String title;
-//   final String? subtitle;
-//   final VoidCallback? onTap;
-//   final bool isSelected;
-
-//   @override
-//   State<MechanixSectionListItem> createState() =>
-//       _MechanixSectionListItemState();
-// }
-
-// class _MechanixSectionListItemState extends State<MechanixSectionListItem> {
-//   bool _isHovered = false;
-//   bool _isPressed = false;
-
-//   Set<WidgetState> get _states {
-//     return {
-//       if (widget.isSelected) WidgetState.selected,
-//       if (_isHovered) WidgetState.hovered,
-//       if (_isPressed) WidgetState.pressed,
-//       if (widget.onTap == null) WidgetState.disabled,
-//     };
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final theme = MechanixSectionListTheme.of(context);
-//     final textStyle = theme.getTextStyle(_states);
-
-//     return GestureDetector(
-//       onTap: widget.onTap,
-//       onTapDown: (_) => setState(() => _isPressed = true),
-//       onTapUp: (_) => setState(() => _isPressed = false),
-//       onTapCancel: () => setState(() => _isPressed = false),
-//       child: MouseRegion(
-//         onEnter: (_) => setState(() => _isHovered = true),
-//         onExit: (_) => setState(() => _isHovered = false),
-//         child: Container(
-//           padding: const EdgeInsets.all(16.0),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Text(
-//                 widget.title,
-//                 style: textStyle,
-//               ),
-//               if (widget.subtitle != null)
-//                 Text(
-//                   widget.subtitle!,
-//                   style: textStyle.copyWith(
-//                     fontSize: (textStyle.fontSize ?? 14) * 0.8,
-//                   ),
-//                 ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
