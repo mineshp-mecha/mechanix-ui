@@ -48,6 +48,7 @@ flutter:
   assets:
     - assets/icons/right-caret.png
     - assets/icons/wifi.png
+    - assets/icons/back_icon.png
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
