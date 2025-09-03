@@ -12,6 +12,8 @@ extension CircularRadius on BorderRadius {
 
   static final xl = BorderRadius.circular(16.0);
 
+  static final circle = BorderRadius.circular(50.0);
+
   static BorderRadius all([double radius = mechanixRadius]) =>
       BorderRadius.circular(radius);
 }
