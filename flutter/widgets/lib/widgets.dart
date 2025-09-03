@@ -14,7 +14,6 @@ export 'src/widgets/mechanix_elevated_button.dart';
 export 'src/widgets/mechanix_outline_button.dart';
 export 'src/widgets/mechanix_text_button.dart';
 export 'widgets/sectionList/mechanix_section_list.dart';
-// export 'widgets/switch/mechanix_switch.dart';
 export 'widgets/theme/theme_toggle.dart';
 export 'widgets/theme/theme_toggle_button.dart';
 export 'widgets/theme/variant_picker.dart';
