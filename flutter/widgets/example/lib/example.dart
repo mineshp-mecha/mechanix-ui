@@ -22,7 +22,7 @@ class _MasterDetailPage extends StatefulWidget {
 }
 
 class _MasterDetailPageState extends State<_MasterDetailPage> {
-  int _selectedIndex = 3;
+  int _selectedIndex = 5;
 
   @override
   Widget build(BuildContext context) {
