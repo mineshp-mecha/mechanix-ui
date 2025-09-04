@@ -7,7 +7,10 @@ ThemeData createTheme(
   final ThemeData theme =
       ThemeData.from(useMaterial3: useMaterial3, colorScheme: colorScheme);
 
-  return theme.copyWith(textTheme: createTextTheme(colorScheme.primary));
+  return theme.copyWith(
+    textTheme: createTextTheme(
+        onSurface: colorScheme.onSurface, surfaceDim: colorScheme.surfaceDim),
+  );
 }
 
 ThemeData createLightTheme(
