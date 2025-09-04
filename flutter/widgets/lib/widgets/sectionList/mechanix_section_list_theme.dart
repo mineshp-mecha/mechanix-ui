@@ -16,10 +16,10 @@ class MechanixSectionListThemeData
     this.divider,
     this.widgetPadding = const EdgeInsets.only(bottom: 40),
     this.titlePadding = const EdgeInsets.only(bottom: 8),
-    this.itemPadding = const EdgeInsets.all(20),
+    this.itemPadding = const EdgeInsets.all(16),
     this.dividerPadding = const EdgeInsets.symmetric(horizontal: 20),
-    this.widgetRadius,
-    this.itemBorderRadius,
+    this.widgetRadius = const BorderRadius.all(Radius.circular(4)),
+    this.itemBorderRadius = BorderRadius.zero,
   });
 
   final WidgetStateProperty<Color?>? backgroundColor;

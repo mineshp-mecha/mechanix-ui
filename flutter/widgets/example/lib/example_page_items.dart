@@ -2,7 +2,10 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:widgets_example/pages/alerts_page.dart';
 import 'package:widgets_example/pages/buttons_page.dart';
+import 'package:widgets_example/pages/floating_action_button_page.dart';
 import 'package:widgets_example/pages/icon_widget_page.dart';
+import 'package:widgets_example/pages/list_page.dart';
+import 'package:widgets_example/pages/navigation_page.dart';
 import 'package:widgets_example/pages/section_list_page.dart';
 import 'package:widgets_example/pages/simple_list_page.dart';
 
@@ -65,4 +68,19 @@ final examplePageItems = <PageItem>[
     pageBuilder: (context) => const MechanixIconWidget(),
     iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
   ),
+  PageItem(
+      title: 'MechanixFABMenu',
+      pageBuilder: (context) => const FabExamplePage(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'Mechanix Navigation Bar',
+      pageBuilder: (context) => const NavigationPage(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'Mechanix Pressable List',
+      pageBuilder: (context) => const MechanixList(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.smart_screen_rounded)),
 ].sortedBy((page) => page.title);
