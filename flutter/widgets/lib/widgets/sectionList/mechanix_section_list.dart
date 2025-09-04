@@ -77,32 +77,29 @@ class MechanixSectionList extends StatelessWidget {
       onTapDown: item.onTapDown,
       onDoubleTap: item.onDoubleTap,
       child: Container(
-        color: item.backgroundColor ?? context.colorScheme.secondary,
-        child: Container(
-          padding: listTheme.itemPadding,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  if (item.leading != null) item.leading!.padRight(),
-                  Text(
-                    item.title,
-                    style: context.textTheme.labelMedium
-                        ?.merge(item.titleTextStyle),
-                  )
-                ],
-              ),
-              if (item.defaultTrailing && item.trailing == null)
-                IconWidget(
-                  iconWidth: 10,
-                  iconHeight: 17,
-                  iconPath: MechanixIconImages.rightCaret,
+        padding: listTheme.itemPadding,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                if (item.leading != null) item.leading!.padRight(),
+                Text(
+                  item.title,
+                  style:
+                      context.textTheme.labelMedium?.merge(item.titleTextStyle),
                 )
-              else if (item.trailing != null)
-                item.trailing!,
-            ],
-          ),
+              ],
+            ),
+            if (item.defaultTrailing && item.trailing == null)
+              IconWidget(
+                iconWidth: 10,
+                iconHeight: 17,
+                iconPath: MechanixIconImages.rightCaret,
+              )
+            else if (item.trailing != null)
+              item.trailing!,
+          ],
         ),
       ),
     );
@@ -189,7 +186,7 @@ class MechanixSectionList extends StatelessWidget {
             ),
           Container(
               decoration: BoxDecoration(
-                borderRadius: CircularRadius.md,
+                borderRadius: listTheme.widgetRadius,
                 color: listTheme.backgroundColor?.resolve({}) ??
                     context.colorScheme.secondary,
               ),
