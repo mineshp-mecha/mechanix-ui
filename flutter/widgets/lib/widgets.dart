@@ -12,7 +12,7 @@ export 'src/widgets/mechanix_elevated_button.dart';
 export 'src/widgets/mechanix_outline_button.dart';
 export 'src/widgets/mechanix_text_button.dart';
 export 'widgets/icon_widget.dart';
-export 'widgets/listItems/mechanix_list_items.dart';
+export 'widgets/listItems/mechanix_simple_list.dart';
 export 'widgets/navigation_bar/mechanix_navigation_bar.dart';
 export 'widgets/sectionList/mechanix_section_list.dart';
 export 'widgets/theme/theme_toggle.dart';
