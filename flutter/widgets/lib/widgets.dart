@@ -5,19 +5,19 @@
 // platforms in the `pubspec.yaml` at
 // https://flutter.dev/to/pubspec-plugin-platforms.
 
-library;
-
 export 'src/widgets/mechanix_alert_dialog.dart';
 export 'src/widgets/mechanix_bottom_alert.dart';
 export 'src/widgets/mechanix_check_box.dart';
 export 'src/widgets/mechanix_elevated_button.dart';
 export 'src/widgets/mechanix_outline_button.dart';
 export 'src/widgets/mechanix_text_button.dart';
+export 'widgets/icon_widget.dart';
+export 'widgets/listItems/mechanix_list_items.dart';
+export 'widgets/navigation_bar/mechanix_navigation_bar.dart';
 export 'widgets/sectionList/mechanix_section_list.dart';
 export 'widgets/theme/theme_toggle.dart';
 export 'widgets/theme/theme_toggle_button.dart';
 export 'widgets/theme/variant_picker.dart';
-export 'widgets/navigation_bar/mechanix_navigation_bar.dart';
 export 'widgets/floatingActionButton/mechanix_fab.dart';
 export 'widgets/menu/mechanix_menu.dart';
 export 'widgets/menu/mechanix_menu_item.dart';

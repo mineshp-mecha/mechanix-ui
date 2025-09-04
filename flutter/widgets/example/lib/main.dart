@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:widgets/mechanix.dart';
-import 'package:widgets/widgets/pressable_list/mechanix_pressable_list_theme.dart';
-import 'package:widgets_example/example.dart';
 import 'package:watch_it/watch_it.dart';
+import 'package:widgets/mechanix.dart';
+import 'package:widgets_example/example.dart';
 
 import 'pages/navigation_second_page.dart';
 
@@ -21,9 +20,9 @@ class MechanixApp extends StatelessWidget with WatchItMixin {
         watchPropertyValue((ThemeToggle t) => t.mechanixVariant);
 
     return MechanixTheme(
-      data: MechanixThemeData(mechanixVariant: mechanixVariant, extensions: [
-        MechanixPressableListThemeData(checkboxColor: Colors.red)
-      ]),
+      data: MechanixThemeData(
+        mechanixVariant: mechanixVariant,
+      ),
       builder: (context, mechanix, child) => _MechanixApp(
         darkTheme: mechanix.darkTheme,
         lightTheme: mechanix.lightTheme,
