@@ -48,6 +48,7 @@ flutter:
   assets:
     - assets/icons/right-caret.png
     - assets/icons/wifi.png
+    - assets/icons/back_icon.png
 
   fonts:
     - family: Inter
