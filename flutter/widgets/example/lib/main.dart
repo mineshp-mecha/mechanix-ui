@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:widgets/mechanix.dart';
-import 'package:widgets/widgets/switch/mechanix_switch_theme.dart';
+import 'package:widgets/widgets/pressable_list/mechanix_pressable_list_theme.dart';
 import 'package:widgets_example/example.dart';
 import 'package:watch_it/watch_it.dart';
+
+import 'pages/navigation_second_page.dart';
 
 void main() {
   di.registerSingleton(ThemeToggle());
@@ -19,7 +21,9 @@ class MechanixApp extends StatelessWidget with WatchItMixin {
         watchPropertyValue((ThemeToggle t) => t.mechanixVariant);
 
     return MechanixTheme(
-      data: MechanixThemeData(mechanixVariant: mechanixVariant),
+      data: MechanixThemeData(mechanixVariant: mechanixVariant, extensions: [
+        MechanixPressableListThemeData(checkboxColor: Colors.red)
+      ]),
       builder: (context, mechanix, child) => _MechanixApp(
         darkTheme: mechanix.darkTheme,
         lightTheme: mechanix.lightTheme,
@@ -47,6 +51,7 @@ class _MechanixApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeMode,
+      routes: {'/navigation-second-route': (context) => NavigationSecondPage()},
       home: Scaffold(
         body: const Example(),
       ),
