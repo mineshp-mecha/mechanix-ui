@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:widgets/mechanix.dart';
-import 'package:widgets/widgets/switch/mechanix_switch_theme.dart';
-import 'package:widgets_example/example.dart';
 import 'package:watch_it/watch_it.dart';
+import 'package:widgets/mechanix.dart';
+import 'package:widgets_example/example.dart';
 
 void main() {
   di.registerSingleton(ThemeToggle());

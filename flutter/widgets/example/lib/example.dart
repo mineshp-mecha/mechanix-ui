@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:widgets/widgets.dart';
+
 import 'example_page_items.dart';
 
 class Example extends StatelessWidget {
@@ -21,7 +22,7 @@ class _MasterDetailPage extends StatefulWidget {
 }
 
 class _MasterDetailPageState extends State<_MasterDetailPage> {
-  int _selectedIndex = 3;
+  int _selectedIndex = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,8 @@ class _MasterDetailPageState extends State<_MasterDetailPage> {
                 Column(
                   children: [
                     ThemeToggleButton(),
-                    Expanded( // ← Give the sidebar expanded height
+                    Expanded(
+                      // ← Give the sidebar expanded height
                       child: _buildSidebar(context),
                     ),
                   ],

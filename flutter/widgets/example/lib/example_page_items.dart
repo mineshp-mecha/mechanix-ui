@@ -2,7 +2,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:widgets_example/pages/alerts_page.dart';
 import 'package:widgets_example/pages/buttons_page.dart';
-import 'package:widgets_example/pages/menu_page.dart';
+import 'package:widgets_example/pages/icon_widget_page.dart';
+import 'package:widgets_example/pages/list_items_page.dart';
+import 'package:widgets_example/pages/section_list_page.dart';
 
 import 'pages/checkbox_page.dart';
 
@@ -49,8 +51,18 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
   ),
   PageItem(
-      title: 'MechanixSettingsMenu',
-      pageBuilder: (context) => const MechanixSettingsMenuPage(),
-      iconBuilder: (context, selected) =>
-          const Icon(Icons.smart_screen_rounded))
+    title: 'MechanixSectionList',
+    pageBuilder: (context) => const MechanixSettingsMenuPage(),
+    iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
+  ),
+  PageItem(
+    title: 'MechanixListItems',
+    pageBuilder: (context) => const MechanixListItemsPage(),
+    iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
+  ),
+  PageItem(
+    title: 'MechanixIconWidget',
+    pageBuilder: (context) => const MechanixIconWidget(),
+    iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
+  ),
 ].sortedBy((page) => page.title);

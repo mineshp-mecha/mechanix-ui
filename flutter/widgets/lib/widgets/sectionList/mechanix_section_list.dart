@@ -1,119 +1,202 @@
 import 'package:flutter/material.dart';
 import 'package:widgets/mechanix.dart';
-import 'package:widgets/widgets/sectionList/mechanix_section_list_items.dart';
 import 'package:widgets/widgets/sectionList/mechanix_section_list_theme.dart';
-import 'package:widgets/widgets/sectionList/section_list_type.dart';
+import 'package:widgets/widgets/sectionList/section_list_items_type.dart';
 
 class MechanixSectionList extends StatelessWidget {
-  const MechanixSectionList(
-      {super.key,
-      this.title,
-      required this.sectionListItems,
-      // this.backgroundColor,
-      this.titleTextStyle,
-      this.dividerThickness = 1,
-      this.dividerHeight = 1,
-      this.dividerColor,
-      this.divider,
-      this.dividerPadding = 16,
-      this.titlePadding,
-      this.isDividerRequired = false});
+  const MechanixSectionList({
+    super.key,
+    this.title,
+    required this.sectionListItems,
+    this.onTap,
+    this.onTapUp,
+    this.onTapDown,
+    this.onDoubleTap,
+    this.itemBuilder,
+    this.separatorBuilder,
+    this.physics,
+    this.controller,
+  }) : itemCount = null;
+
+  const MechanixSectionList.builder({
+    super.key,
+    this.title,
+    this.onTap,
+    this.onTapUp,
+    this.onTapDown,
+    this.onDoubleTap,
+    required this.itemCount,
+    required this.itemBuilder,
+    this.physics,
+    this.controller,
+  })  : separatorBuilder = null,
+        sectionListItems = const [];
+
+  const MechanixSectionList.separated({
+    super.key,
+    this.title,
+    required this.sectionListItems,
+    this.onTap,
+    this.onTapUp,
+    this.onTapDown,
+    this.onDoubleTap,
+    this.itemBuilder,
+    required this.separatorBuilder,
+    this.physics,
+    this.controller,
+  }) : itemCount = null;
 
   final String? title;
 
-  // final Color?
-  // ;
+  final int? itemCount;
 
-  final TextStyle? titleTextStyle;
+  final List<SectionListItems> sectionListItems;
 
-  final double dividerThickness;
+  final GestureTapCallback? onTap;
 
-  final double dividerHeight;
+  final GestureTapUpCallback? onTapUp;
 
-  final Color? dividerColor;
+  final GestureTapDownCallback? onTapDown;
 
-  final bool isDividerRequired;
+  final GestureTapCallback? onDoubleTap;
 
-  final double dividerPadding;
+  final Widget? Function(BuildContext, int)? itemBuilder;
 
-  final EdgeInsets? titlePadding;
+  final Widget Function(BuildContext, int)? separatorBuilder;
 
-  final Widget? divider;
+  final ScrollPhysics? physics;
 
-  final List<SectionListItemsType> sectionListItems;
+  final ScrollController? controller;
 
-  Widget _buildSectionList(
-    SectionListItemsType item,
-  ) {
-    return MechanixSectionListItems(
-      leading: item.leading,
-      trailing: item.trailing,
-      title: item.title,
-      subTitle: item.subTitle,
-      titleTextStyle: item.titleTextStyle,
-      subTitleTextStyle: item.subTitleTextStyle,
+  Widget _buildSectionList(BuildContext context, SectionListItems item,
+      MechanixSectionListThemeData listTheme) {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: item.onTap,
       onTapUp: item.onTapUp,
       onTapDown: item.onTapDown,
       onDoubleTap: item.onDoubleTap,
+      child: Container(
+        color: item.backgroundColor ?? context.colorScheme.secondary,
+        child: Container(
+          padding: listTheme.itemPadding,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  if (item.leading != null) item.leading!.padRight(),
+                  Text(
+                    item.title,
+                    style: context.textTheme.labelMedium
+                        ?.merge(item.titleTextStyle),
+                  )
+                ],
+              ),
+              if (item.defaultTrailing && item.trailing == null)
+                IconWidget(
+                  iconWidth: 10,
+                  iconHeight: 17,
+                  iconPath: MechanixIconImages.rightCaret,
+                )
+              else if (item.trailing != null)
+                item.trailing!,
+            ],
+          ),
+        ),
+      ),
     );
+  }
+
+  Widget _buildDefaultSeparator(BuildContext context, int index) {
+    final listTheme = MechanixSectionListTheme.of(context);
+    if (listTheme.divider != null) {
+      return listTheme.divider!;
+    } else {
+      return Padding(
+        padding: listTheme.dividerPadding,
+        child: Divider(
+          thickness: listTheme.dividerThickness,
+          height: listTheme.dividerHeight,
+          color: listTheme.dividerColor,
+        ),
+      );
+    }
+  }
+
+  Widget _buildListView(
+      {required BuildContext context,
+      required bool useSeparator,
+      required bool themeRequiresDivider}) {
+    final listTheme = MechanixSectionListTheme.of(context);
+
+    if (useSeparator) {
+      return ListView.separated(
+        shrinkWrap: true,
+        physics: physics,
+        controller: controller,
+        itemCount: sectionListItems.length,
+        itemBuilder: itemBuilder ??
+            (context, index) =>
+                _buildSectionList(context, sectionListItems[index], listTheme),
+        separatorBuilder: separatorBuilder!,
+      );
+    } else if (themeRequiresDivider) {
+      return ListView.separated(
+        shrinkWrap: true,
+        physics: physics,
+        controller: controller,
+        itemCount: itemCount ?? sectionListItems.length,
+        itemBuilder: itemBuilder ??
+            (context, index) =>
+                _buildSectionList(context, sectionListItems[index], listTheme),
+        separatorBuilder: _buildDefaultSeparator,
+      );
+    } else {
+      return ListView.builder(
+        shrinkWrap: true,
+        physics: physics,
+        controller: controller,
+        itemCount: sectionListItems.length,
+        itemBuilder: itemBuilder ??
+            (context, index) =>
+                _buildSectionList(context, sectionListItems[index], listTheme),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final listTheme = MechanixSectionListTheme.of(context);
-
-    print(listTheme.toString());
+    final bool useSeparator = separatorBuilder != null;
+    final bool themeRequiresDivider =
+        listTheme.isDividerRequired && !useSeparator;
 
     return Container(
+      padding: listTheme.widgetPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title != null)
             Padding(
-              padding: titlePadding ?? Spacing.bottom(8),
+              padding: listTheme.titlePadding,
               child: Text(
                 title!,
                 style: context.textTheme.labelMedium
                     ?.copyWith(color: context.colorScheme.surfaceDim)
-                    .merge(titleTextStyle ?? listTheme.titleTextStyle),
+                    .merge(listTheme.titleTextStyle),
               ),
             ),
           Container(
-            decoration: BoxDecoration(
-              borderRadius: CircularRadius.md,
-              color: listTheme.backgroundColor?.resolve({}) ??
-                  context.colorScheme.secondary,
-            ),
-            child: Column(
-              children: [
-                if (isDividerRequired)
-                  ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: sectionListItems.length,
-                    itemBuilder: (context, index) =>
-                        _buildSectionList(sectionListItems[index]),
-                    separatorBuilder: (BuildContext context, int index) {
-                      if (divider != null) {
-                        return divider!;
-                      } else {
-                        return Divider(
-                          thickness: dividerThickness,
-                          height: dividerHeight,
-                        ).padHorizontal(dividerPadding);
-                      }
-                    },
-                  )
-                else
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: sectionListItems.length,
-                    itemBuilder: (context, index) =>
-                        _buildSectionList(sectionListItems[index]),
-                  )
-              ],
-            ),
-          ),
+              decoration: BoxDecoration(
+                borderRadius: CircularRadius.md,
+                color: listTheme.backgroundColor?.resolve({}) ??
+                    context.colorScheme.secondary,
+              ),
+              child: _buildListView(
+                  context: context,
+                  useSeparator: useSeparator,
+                  themeRequiresDivider: themeRequiresDivider)),
         ],
       ),
     );
