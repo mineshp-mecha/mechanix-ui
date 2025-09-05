@@ -30,6 +30,7 @@ class _MechanixIconWidgetState extends State<MechanixIconWidget> {
             iconHeight: 20,
             iconPath: MechanixIconImages.wifi,
           ),
+          IconWidget.fromIconData(icon: Icon(Icons.wallet))
         ],
       ),
     );
