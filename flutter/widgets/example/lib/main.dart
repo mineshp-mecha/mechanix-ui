@@ -3,6 +3,8 @@ import 'package:watch_it/watch_it.dart';
 import 'package:widgets/mechanix.dart';
 import 'package:widgets_example/example.dart';
 
+import 'pages/navigation_second_page.dart';
+
 void main() {
   di.registerSingleton(ThemeToggle());
   runApp(const MechanixApp());
@@ -18,7 +20,9 @@ class MechanixApp extends StatelessWidget with WatchItMixin {
         watchPropertyValue((ThemeToggle t) => t.mechanixVariant);
 
     return MechanixTheme(
-      data: MechanixThemeData(mechanixVariant: mechanixVariant),
+      data: MechanixThemeData(
+        mechanixVariant: mechanixVariant,
+      ),
       builder: (context, mechanix, child) => _MechanixApp(
         darkTheme: mechanix.darkTheme,
         lightTheme: mechanix.lightTheme,
@@ -46,6 +50,7 @@ class _MechanixApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeMode,
+      routes: {'/navigation-second-route': (context) => NavigationSecondPage()},
       home: Scaffold(
         body: const Example(),
       ),
