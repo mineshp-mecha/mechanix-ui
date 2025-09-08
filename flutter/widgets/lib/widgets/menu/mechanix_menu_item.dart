@@ -61,7 +61,7 @@ class _MechanixMenuItemState extends State<MechanixMenuItem> {
         Theme.of(context).colorScheme.onSurface.withOpacity(0.6);
 
     final baseColor = Colors.transparent;
-    final hoverColor = Theme.of(context).colorScheme.primary.withOpacity(0.1);
+    final hoverColor = Theme.of(context).colorScheme.onSurface.withOpacity(0.1);
 
     final labelWidget = Text(widget.label, style: resolvedTextStyle);
 
