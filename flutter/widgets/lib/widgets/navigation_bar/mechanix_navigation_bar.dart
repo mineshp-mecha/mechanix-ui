@@ -96,7 +96,7 @@ class MechanixNavigationBar extends StatelessWidget
                       width: 8,
                       child: backIcon ??
                           Image.asset(
-                            MechanixIcons.backButton,
+                            MechanixIconImages.backIcon,
                             package: 'widgets',
                           )),
                 )

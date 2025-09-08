@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:widgets_example/pages/alerts_page.dart';
 import 'package:widgets_example/pages/buttons_page.dart';
 import 'package:widgets_example/pages/floating_action_button_page.dart';
-import 'package:widgets_example/pages/menu_page.dart';
+import 'package:widgets_example/pages/icon_widget_page.dart';
+import 'package:widgets_example/pages/list_page.dart';
+import 'package:widgets_example/pages/navigation_page.dart';
+import 'package:widgets_example/pages/section_list_page.dart';
+import 'package:widgets_example/pages/select_page.dart';
+import 'package:widgets_example/pages/simple_list_page.dart';
 
 import 'pages/checkbox_page.dart';
 
@@ -50,8 +55,38 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
   ),
   PageItem(
+    title: 'MechanixSectionList',
+    pageBuilder: (context) => const MechanixSettingsMenuPage(),
+    iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
+  ),
+  PageItem(
+    title: 'MechanixSimpleList',
+    pageBuilder: (context) => const MechanixSimpleListPage(),
+    iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
+  ),
+  PageItem(
+    title: 'MechanixIconWidget',
+    pageBuilder: (context) => const MechanixIconWidget(),
+    iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
+  ),
+  PageItem(
       title: 'MechanixFABMenu',
       pageBuilder: (context) => const FabExamplePage(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'Mechanix Navigation Bar',
+      pageBuilder: (context) => const NavigationPage(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'Mechanix Pressable List',
+      pageBuilder: (context) => const MechanixList(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'MechanixSelect',
+      pageBuilder: (context) => const SelectPage(),
       iconBuilder: (context, selected) =>
           const Icon(Icons.smart_screen_rounded)),
   PageItem(
