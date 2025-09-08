@@ -50,13 +50,12 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => const Icon(Icons.smart_screen_rounded),
   ),
   PageItem(
-      title: 'MechanixSettingsMenu',
-      pageBuilder: (context) => const MechanixSettingsMenuPage(),
-      iconBuilder: (context, selected) =>
-          const Icon(Icons.smart_screen_rounded)),
-  PageItem(
       title: 'MechanixFABMenu',
       pageBuilder: (context) => const FabExamplePage(),
       iconBuilder: (context, selected) =>
           const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'MechanixMenu',
+      pageBuilder: (context) => MenuPage(),
+      iconBuilder: (context, selected) => const Icon(Icons.menu)),
 ].sortedBy((page) => page.title);
