@@ -28,6 +28,10 @@ ThemeData createDarkTheme(
   final colorScheme = ColorScheme.fromSeed(
     seedColor: primaryColor,
     brightness: Brightness.dark,
+    primary: Color(0xFF2D8AFF),
+    secondary: Color(0xFF2B2B2B),
+    onSurface: Color(0xFFF0F0F0),
+    surfaceDim: Color(0xFF989898),
   );
 
   return createTheme(colorScheme: colorScheme);

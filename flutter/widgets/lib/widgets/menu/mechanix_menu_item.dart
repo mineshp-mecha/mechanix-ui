@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widgets/extensions/icon_size.dart';
 import 'mechanix_menu_item_theme.dart';
 
 enum MenuItemLayout {
@@ -17,8 +18,10 @@ class MechanixMenuItem extends StatefulWidget {
   final TextStyle? textStyle;
   final MenuItemLayout layout;
 
-  final bool? checkValue;
+  final bool? checkValue; // controlled externally
   final ValueChanged<bool>? onCheckChanged;
+  final bool selectable; // Whether this item supports selection
+  final bool isRadio; // true for single-select, false for multi-select
 
   const MechanixMenuItem({
     super.key,
@@ -30,6 +33,8 @@ class MechanixMenuItem extends StatefulWidget {
     this.layout = MenuItemLayout.iconLeft,
     this.checkValue,
     this.onCheckChanged,
+    this.selectable = false,
+    this.isRadio = false,
   });
 
   @override
@@ -37,18 +42,7 @@ class MechanixMenuItem extends StatefulWidget {
 }
 
 class _MechanixMenuItemState extends State<MechanixMenuItem> {
-  late bool _checked;
-
-  @override
-  void initState() {
-    super.initState();
-    _checked = widget.checkValue ?? false;
-  }
-
-  void _toggleCheck() {
-    setState(() => _checked = !_checked);
-    widget.onCheckChanged?.call(_checked);
-  }
+  bool _isHovered = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,16 +55,25 @@ class _MechanixMenuItemState extends State<MechanixMenuItem> {
     final resolvedIconColor =
         theme.iconColor?.resolve({}) ?? Theme.of(context).colorScheme.onSurface;
 
-    final resolvedCheckColor = Theme.of(context).colorScheme.primary;
-    //     theme.checkColor?.resolve({}) ?? Theme.of(context).colorScheme.primary;
+    final resolvedCheckColor =
+        theme.checkColor?.resolve({}) ?? Theme.of(context).colorScheme.primary;
+    final resolvedUncheckColor = theme.uncheckColor?.resolve({}) ??
+        Theme.of(context).colorScheme.onSurface.withOpacity(0.6);
+
+    final baseColor = Colors.transparent;
+    final hoverColor = Theme.of(context).colorScheme.onSurface.withOpacity(0.1);
 
     final labelWidget = Text(widget.label, style: resolvedTextStyle);
 
-    // Replace Checkbox with custom icons for themed look
     final checkWidget = Icon(
-      _checked ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-      size: 20,
-      color: resolvedCheckColor,
+      widget.checkValue == true
+          ? (widget.isRadio ? Icons.radio_button_checked : Icons.check_box)
+          : (widget.isRadio
+              ? Icons.radio_button_unchecked
+              : Icons.check_box_outline_blank),
+      size: IconSize.xl,
+      color:
+          widget.checkValue == true ? resolvedCheckColor : resolvedUncheckColor,
     );
 
     List<Widget> children;
@@ -80,47 +83,48 @@ class _MechanixMenuItemState extends State<MechanixMenuItem> {
         children = [
           if (widget.leadingWidget != null)
             IconTheme(
-              data: IconThemeData(color: resolvedIconColor, size: 20),
+              data: IconThemeData(color: resolvedIconColor, size: IconSize.xl),
               child: widget.leadingWidget!,
             ),
           if (widget.leadingWidget != null) const SizedBox(width: 12),
           Expanded(child: labelWidget),
         ];
         break;
-
       case MenuItemLayout.iconRight:
         children = [
           Expanded(child: labelWidget),
           if (widget.trailingWidget != null) ...[
             const SizedBox(width: 12),
             IconTheme(
-              data: IconThemeData(color: resolvedIconColor, size: 20),
+              data: IconThemeData(color: resolvedIconColor, size: IconSize.xl),
               child: widget.trailingWidget!,
             ),
           ],
         ];
         break;
-
       case MenuItemLayout.bothSides:
         children = [
-          // left: either custom leading widget OR checkbox
-          if (widget.leadingWidget != null)
+          if (widget.leadingWidget != null) ...[
             IconTheme(
-              data: IconThemeData(color: resolvedIconColor, size: 20),
+              data: IconThemeData(color: resolvedIconColor, size: IconSize.xl),
               child: widget.leadingWidget!,
-            )
-          else if (widget.onCheckChanged != null) ...[
-            GestureDetector(onTap: _toggleCheck, child: checkWidget),
+            ),
+            const SizedBox(width: 12),
+          ] else if (widget.selectable && widget.onCheckChanged != null) ...[
+            GestureDetector(
+              onTap: toggleCheck,
+
+              // onTap: () =>
+              //     widget.onCheckChanged!(!(widget.checkValue ?? false)),
+              child: checkWidget,
+            ),
             const SizedBox(width: 12),
           ],
-
           Expanded(child: labelWidget),
-
-          // right: trailing widget if provided
           if (widget.trailingWidget != null) ...[
             const SizedBox(width: 12),
             IconTheme(
-              data: IconThemeData(color: resolvedIconColor, size: 20),
+              data: IconThemeData(color: resolvedIconColor, size: IconSize.xl),
               child: widget.trailingWidget!,
             ),
           ],
@@ -129,7 +133,12 @@ class _MechanixMenuItemState extends State<MechanixMenuItem> {
 
       case MenuItemLayout.checkLeft:
         children = [
-          GestureDetector(onTap: _toggleCheck, child: checkWidget),
+          if (widget.selectable && widget.onCheckChanged != null)
+            GestureDetector(
+              onTap: () =>
+                  widget.onCheckChanged!(!(widget.checkValue ?? false)),
+              child: checkWidget,
+            ),
           const SizedBox(width: 12),
           Expanded(child: labelWidget),
           if (widget.trailingWidget != null) ...[
@@ -138,26 +147,43 @@ class _MechanixMenuItemState extends State<MechanixMenuItem> {
           ],
         ];
         break;
-
       case MenuItemLayout.checkRight:
         children = [
           Expanded(child: labelWidget),
           const SizedBox(width: 12),
-          GestureDetector(onTap: _toggleCheck, child: checkWidget),
+          if (widget.selectable && widget.onCheckChanged != null)
+            GestureDetector(
+              onTap: () =>
+                  widget.onCheckChanged!(!(widget.checkValue ?? false)),
+              child: checkWidget,
+            ),
         ];
         break;
     }
 
-    return InkWell(
-      onTap: () {
-        widget.onTap?.call();
-        if (widget.onCheckChanged != null) _toggleCheck();
-      },
-      borderRadius: BorderRadius.circular(6),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Row(children: children),
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: Container(
+        color: _isHovered ? hoverColor : baseColor,
+        child: InkWell(
+          onTap: () {
+            widget.onTap?.call();
+            toggleCheck();
+          },
+          borderRadius: BorderRadius.circular(6),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(children: children),
+          ),
+        ),
       ),
     );
+  }
+
+  void toggleCheck() {
+    if (widget.selectable && widget.onCheckChanged != null) {
+      widget.onCheckChanged!(!(widget.checkValue ?? false));
+    }
   }
 }
