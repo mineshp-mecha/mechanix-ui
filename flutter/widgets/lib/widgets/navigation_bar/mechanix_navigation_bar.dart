@@ -20,6 +20,7 @@ class MechanixNavigationBar extends StatelessWidget
   final double? elevation;
   final IconThemeData? actionsIconTheme;
   final double? titleSpacing;
+  final double? scrolledUnderElevation;
 
   const MechanixNavigationBar(
       {super.key,
@@ -36,13 +37,16 @@ class MechanixNavigationBar extends StatelessWidget
       this.foregroundColor,
       this.actionsIconTheme,
       this.actionWidgets,
-      this.backgroundColor});
+      this.backgroundColor,
+      this.scrolledUnderElevation});
 
   @override
   Widget build(BuildContext context) {
     final barTheme = MechanixNavigationBarTheme.of(context);
     final theme = Theme.of(context);
     final resolvedCenterTitle = centerTitle ?? barTheme.centerTitle ?? false;
+    final resolvedScrolledUnderElevation =
+        scrolledUnderElevation ?? barTheme.scrolledUnderElevation ?? 0;
 
     final resolvedAutomaticallyImplyLeading =
         automaticallyImplyLeading ?? barTheme.automaticallyImplyLeading;
@@ -80,6 +84,7 @@ class MechanixNavigationBar extends StatelessWidget
 
     return AppBar(
       toolbarHeight: resolvedHeight,
+      scrolledUnderElevation: resolvedScrolledUnderElevation,
       automaticallyImplyLeading: resolvedAutomaticallyImplyLeading,
       backgroundColor: resolvedBackgroundColor,
       leadingWidth: resolvedLeadingWidth,

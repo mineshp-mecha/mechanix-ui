@@ -3,7 +3,8 @@ import 'mechanix_fab_item_theme.dart';
 
 /// Defines a single FAB item (like an action in a SpeedDial).
 class MechanixFabItem {
-  final IconData icon;
+  final IconData? icon;
+  final String? iconPath;
   final String? label;
   final VoidCallback onTap;
   final Color? backgroundColor;
@@ -22,7 +23,18 @@ class MechanixFabItem {
     this.iconSize,
     this.labelTextStyle,
     this.anchorLink,
-  });
+  }) : iconPath = null;
+
+  const MechanixFabItem.fromImage({
+    required this.iconPath,
+    this.label,
+    required this.onTap,
+    this.backgroundColor,
+    this.iconColor,
+    this.iconSize,
+    this.labelTextStyle,
+    this.anchorLink,
+  }) : icon = null;
 
   Widget build(BuildContext context) {
     final itemTheme = MechanixFabItemTheme.of(context);
@@ -35,11 +47,17 @@ class MechanixFabItem {
 
     final button = IconButton(
       tooltip: label,
-      icon: Icon(
-        icon,
-        color: resolvedIconColor,
-        size: resolvedIconSize,
-      ),
+      icon: icon == null && iconPath != null
+          ? Image.asset(
+              iconPath!,
+              height: resolvedIconSize,
+              width: resolvedIconSize,
+            )
+          : Icon(
+              icon,
+              color: resolvedIconColor,
+              size: resolvedIconSize,
+            ),
       onPressed: onTap,
     );
 

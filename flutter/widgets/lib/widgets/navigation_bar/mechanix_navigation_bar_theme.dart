@@ -6,18 +6,18 @@ import 'package:flutter/material.dart';
 @immutable
 class MechanixNavigationBarThemeData
     extends ThemeExtension<MechanixNavigationBarThemeData> with Diagnosticable {
-  const MechanixNavigationBarThemeData({
-    this.centerTitle = false,
-    this.automaticallyImplyLeading = true,
-    this.leadingWidth,
-    this.height,
-    this.titleTextStyle,
-    this.backgroundColor,
-    this.foregroundColor,
-    this.elevation,
-    this.actionsIconTheme,
-    this.titleSpacing,
-  });
+  const MechanixNavigationBarThemeData(
+      {this.centerTitle = false,
+      this.automaticallyImplyLeading = true,
+      this.leadingWidth,
+      this.height,
+      this.titleTextStyle,
+      this.backgroundColor,
+      this.foregroundColor,
+      this.elevation,
+      this.actionsIconTheme,
+      this.titleSpacing,
+      this.scrolledUnderElevation});
 
   final bool? centerTitle;
   final bool automaticallyImplyLeading;
@@ -29,6 +29,7 @@ class MechanixNavigationBarThemeData
   final double? elevation;
   final IconThemeData? actionsIconTheme;
   final double? titleSpacing;
+  final double? scrolledUnderElevation;
 
   @override
   MechanixNavigationBarThemeData copyWith({
@@ -42,9 +43,12 @@ class MechanixNavigationBarThemeData
     double? elevation,
     IconThemeData? actionsIconTheme,
     double? titleSpacing,
+    double? scrolledUnderElevation,
   }) {
     return MechanixNavigationBarThemeData(
       centerTitle: centerTitle ?? this.centerTitle,
+      scrolledUnderElevation:
+          scrolledUnderElevation ?? this.scrolledUnderElevation,
       automaticallyImplyLeading:
           automaticallyImplyLeading ?? this.automaticallyImplyLeading,
       leadingWidth: leadingWidth ?? this.leadingWidth,
@@ -69,9 +73,12 @@ class MechanixNavigationBarThemeData
     double? elevation,
     IconThemeData? actionsIconTheme,
     double? titleSpacing,
+    double? scrolledUnderElevation,
   }) {
     return copyWith(
       centerTitle: centerTitle ?? this.centerTitle,
+      scrolledUnderElevation:
+          scrolledUnderElevation ?? this.scrolledUnderElevation,
       automaticallyImplyLeading:
           automaticallyImplyLeading ?? this.automaticallyImplyLeading,
       leadingWidth: leadingWidth ?? this.leadingWidth,
@@ -95,6 +102,8 @@ class MechanixNavigationBarThemeData
 
     return MechanixNavigationBarThemeData(
       centerTitle: t < 0.5 ? centerTitle : o.centerTitle,
+      scrolledUnderElevation:
+          lerpDouble(scrolledUnderElevation, o.scrolledUnderElevation, t),
       automaticallyImplyLeading:
           t < 0.5 ? automaticallyImplyLeading : o.automaticallyImplyLeading,
       leadingWidth: lerpDouble(leadingWidth, o.leadingWidth, t),
@@ -133,6 +142,8 @@ class MechanixNavigationBarThemeData
     properties.add(ColorProperty('backgroundColor', backgroundColor));
     properties.add(ColorProperty('foregroundColor', foregroundColor));
     properties.add(DoubleProperty('elevation', elevation));
+    properties
+        .add(DoubleProperty('scrolledUnderElevation', scrolledUnderElevation));
     properties.add(DiagnosticsProperty<IconThemeData?>(
         'actionsIconTheme', actionsIconTheme));
   }
@@ -150,23 +161,24 @@ class MechanixNavigationBarThemeData
         other.backgroundColor == backgroundColor &&
         other.foregroundColor == foregroundColor &&
         other.elevation == elevation &&
+        other.scrolledUnderElevation == scrolledUnderElevation &&
         other.actionsIconTheme == actionsIconTheme;
   }
 
   @override
   int get hashCode {
     return Object.hash(
-      height,
-      automaticallyImplyLeading,
-      centerTitle,
-      titleSpacing,
-      titleTextStyle,
-      leadingWidth,
-      backgroundColor,
-      foregroundColor,
-      elevation,
-      actionsIconTheme,
-    );
+        height,
+        automaticallyImplyLeading,
+        centerTitle,
+        titleSpacing,
+        titleTextStyle,
+        leadingWidth,
+        backgroundColor,
+        foregroundColor,
+        elevation,
+        actionsIconTheme,
+        scrolledUnderElevation);
   }
 }
 
