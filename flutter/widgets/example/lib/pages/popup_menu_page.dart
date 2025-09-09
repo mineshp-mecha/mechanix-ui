@@ -44,7 +44,7 @@ class PopupMenuPage extends StatelessWidget {
                   style: TextStyle(color: Colors.white)),
               const SizedBox(height: 8),
               const ActionMenuExample(),
-              const SizedBox(height: 32),
+              const Divider(height: 32, color: Colors.white30),
               const Text("Menu 3 - Multi Select",
                   style: TextStyle(color: Colors.white)),
               const SizedBox(height: 8),
