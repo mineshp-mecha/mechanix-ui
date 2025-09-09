@@ -19,6 +19,8 @@ class _FabExamplePageState extends State<FabExamplePage> {
   bool showBottomFAB = false;
   final LayerLink _menuLink = LayerLink();
   bool isChecked = true;
+  OverlayEntry? _menuEntry;
+  bool _isMenuOpen = false;
 
   void _showOverlayFab() {
     setState(() {
@@ -148,9 +150,18 @@ class _FabExamplePageState extends State<FabExamplePage> {
               ? MechanixFloatingActionMenu(
                   items: [
                     MechanixFabItem(
-                      anchorLink: _menuLink, // attach key here
+                      anchorLink: _menuLink,
                       icon: Icons.menu_rounded,
-                      onTap: () => _showAttachedMenuAbove(context),
+                      onTap: () {
+                        if (_isMenuOpen) {
+                          _hideMenu();
+                        } else {
+                          _showAttachedMenuAbove(context);
+                        }
+                      },
+                      iconColor: _isMenuOpen
+                          ? Colors.grey
+                          : Colors.white, // dynamic color
                     ),
                     MechanixFabItem(
                       icon: Icons.add,
@@ -174,93 +185,91 @@ class _FabExamplePageState extends State<FabExamplePage> {
   }
 
   void _showAttachedMenuAbove(BuildContext context) {
-    OverlayEntry? entry;
-
-    entry = OverlayEntry(
+    _menuEntry = OverlayEntry(
       builder: (_) => Positioned.fill(
         child: Stack(
           children: [
-            // tap outside to dismiss
             GestureDetector(
               behavior: HitTestBehavior.translucent,
-              onTap: () => entry?.remove(),
+              onTap: () {
+                _hideMenu();
+              },
             ),
             CompositedTransformFollower(
               link: _menuLink,
               showWhenUnlinked: false,
-              // align follower's bottom with target's top → shows ABOVE
               targetAnchor: Alignment.topLeft,
               followerAnchor: Alignment.bottomLeft,
-              offset: const Offset(0, -8), // small gap above the button
+              offset: const Offset(0, -8),
               child: Material(
-                  color: Colors.transparent,
-                  child: Theme(
-                    data: Theme.of(context).copyWith(
-                      extensions: [
-                        const MechanixMenuThemeData(
-                          backgroundColor:
-                              WidgetStatePropertyAll(Color(0xFF424242)),
-                          borderRadius: 12,
-                          shadowColor: WidgetStatePropertyAll(Colors.black54),
-                        ),
-                        const MechanixMenuItemThemeData(
-                          iconColor: WidgetStatePropertyAll(Colors.white70),
-                          textStyle:
-                              TextStyle(color: Colors.white, fontSize: 14),
-                        ),
-                      ],
-                    ),
-                    child: MechanixMenu(
-                      items: [
-                        MechanixMenuItem(
-                          leadingWidget: Icon(Icons.edit),
-                          label: "Rename",
-                          onTap: () => debugPrint("Rename tapped"),
-                        ),
-                        MechanixMenuDivider(
-                          thickness: 1.2,
-                          // indent: 8,
-                          // endIndent: 8,
-                          color: Colors.white24,
-                        ),
-                        MechanixMenuItem(
-                          leadingWidget: Icon(Icons.delete),
-                          label: "Delete",
-                          onTap: () => debugPrint("Delete tapped"),
-                        ),
-                        MechanixMenuDivider(
-                          thickness: 1.2,
-                          // indent: 8,
-                          // endIndent: 8,
-                          color: Colors.white24,
-                        ),
-                        MechanixMenuItem(
-                          leadingWidget: Icon(Icons.visibility),
-                          label: "Show hidden files",
-                          onTap: () => debugPrint("Show hidden files tapped"),
-                        ),
-                        MechanixMenuDivider(
-                          thickness: 1.2,
-                          color: Colors.white24,
-                        ),
-                        MechanixMenuItem(
-                          label: "Sort by Name",
-                          checkValue: true,
-                          onCheckChanged: (val) {
-                            debugPrint("Checkbox changed: $val");
-                          },
-                          trailingWidget: const Icon(Icons.sort),
-                          layout: MenuItemLayout.bothSides,
-                        )
-                      ],
-                    ),
-                  )),
+                color: Colors.transparent,
+                child: Theme(
+                  data: Theme.of(context).copyWith(
+                    extensions: [
+                      const MechanixMenuThemeData(
+                        backgroundColor:
+                            WidgetStatePropertyAll(Color(0xFF424242)),
+                        borderRadius: 12,
+                        shadowColor: WidgetStatePropertyAll(Colors.black54),
+                      ),
+                      const MechanixMenuItemThemeData(
+                        iconColor: WidgetStatePropertyAll(Colors.white70),
+                        textStyle: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    ],
+                  ),
+                  child: MechanixMenu(
+                    items: [
+                      MechanixMenuItem(
+                        leadingWidget: Icon(Icons.edit),
+                        label: "Rename",
+                        onTap: () => debugPrint("Rename tapped"),
+                      ),
+                      MechanixMenuDivider(color: Colors.white24),
+                      MechanixMenuItem(
+                        leadingWidget: Icon(Icons.delete),
+                        label: "Delete",
+                        onTap: () => debugPrint("Delete tapped"),
+                      ),
+                      MechanixMenuDivider(
+                          thickness: 1.2, color: Colors.white24),
+                      MechanixMenuItem(
+                        leadingWidget: Icon(Icons.visibility),
+                        label: "Show hidden files",
+                        onTap: () => debugPrint("Show hidden files tapped"),
+                      ),
+                      MechanixMenuDivider(
+                          thickness: 1.2, color: Colors.white24),
+                      MechanixMenuItem(
+                        label: "Sort by Name",
+                        checkValue: true,
+                        onCheckChanged: (val) {
+                          debugPrint("Checkbox changed: $val");
+                        },
+                        trailingWidget: const Icon(Icons.sort),
+                        layout: MenuItemLayout.bothSides,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
 
-    Overlay.of(context, rootOverlay: true).insert(entry);
+    Overlay.of(context, rootOverlay: true).insert(_menuEntry!);
+    setState(() {
+      _isMenuOpen = true;
+    });
+  }
+
+  void _hideMenu() {
+    _menuEntry?.remove();
+    _menuEntry = null;
+    setState(() {
+      _isMenuOpen = false;
+    });
   }
 }
