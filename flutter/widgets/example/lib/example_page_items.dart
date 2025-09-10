@@ -1,14 +1,19 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:widgets_example/pages/alerts_page.dart';
+import 'package:widgets_example/pages/bottom_sheet_page.dart';
 import 'package:widgets_example/pages/buttons_page.dart';
 import 'package:widgets_example/pages/floating_action_button_page.dart';
 import 'package:widgets_example/pages/icon_widget_page.dart';
 import 'package:widgets_example/pages/list_page.dart';
 import 'package:widgets_example/pages/navigation_page.dart';
+import 'package:widgets_example/pages/popup_menu_page.dart';
 import 'package:widgets_example/pages/section_list_page.dart';
 import 'package:widgets_example/pages/select_page.dart';
 import 'package:widgets_example/pages/simple_list_page.dart';
+import 'package:widgets_example/pages/slider_widget_page.dart';
+import 'package:widgets_example/pages/text_input_page.dart';
+import 'package:widgets_example/pages/wheel_scroll_page.dart';
 
 import 'pages/checkbox_page.dart';
 
@@ -85,8 +90,32 @@ final examplePageItems = <PageItem>[
       iconBuilder: (context, selected) =>
           const Icon(Icons.smart_screen_rounded)),
   PageItem(
+      title: 'MechanixSlider',
+      pageBuilder: (context) => const MechanixSliderPage(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.smart_screen_rounded)),
+  PageItem(
       title: 'MechanixSelect',
       pageBuilder: (context) => const SelectPage(),
       iconBuilder: (context, selected) =>
           const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'MechanixMenu',
+      pageBuilder: (context) => const PopupMenuPage(),
+      iconBuilder: (context, selected) => const Icon(Icons.menu)),
+  PageItem(
+      title: 'MechanixWheelScroll',
+      pageBuilder: (context) => const WheelScrollPage(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'MechanixTextInput',
+      pageBuilder: (context) => const MechanixTextInputPage(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'MechanixBottomSheet',
+      pageBuilder: (context) => const BottomSheetPage(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.border_top_outlined)),
 ].sortedBy((page) => page.title);

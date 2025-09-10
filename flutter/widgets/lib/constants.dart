@@ -27,3 +27,5 @@ const mechanixBorderWidthLg = 4.0;
 const mechanixBorderWidthXl = 5.0;
 
 const mechanixPrimaryColor = Colors.blue;
+
+const mechanixIconSize = 20.0;

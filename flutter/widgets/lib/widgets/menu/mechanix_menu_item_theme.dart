@@ -7,19 +7,27 @@ class MechanixMenuItemThemeData
   const MechanixMenuItemThemeData({
     this.iconColor,
     this.textStyle,
+    this.checkColor,
+    this.uncheckColor,
   });
 
   final WidgetStateProperty<Color?>? iconColor;
   final TextStyle? textStyle;
+  final WidgetStateProperty<Color?>? checkColor;
+  final WidgetStateProperty<Color?>? uncheckColor;
 
   @override
   MechanixMenuItemThemeData copyWith({
     WidgetStateProperty<Color?>? iconColor,
     TextStyle? textStyle,
+    WidgetStateProperty<Color?>? checkColor,
+    WidgetStateProperty<Color?>? uncheckColor,
   }) {
     return MechanixMenuItemThemeData(
       iconColor: iconColor ?? this.iconColor,
       textStyle: textStyle ?? this.textStyle,
+      checkColor: checkColor ?? this.checkColor,
+      uncheckColor: uncheckColor ?? this.uncheckColor,
     );
   }
 
@@ -32,6 +40,10 @@ class MechanixMenuItemThemeData
       iconColor: WidgetStateProperty.lerp<Color?>(
           iconColor, other.iconColor, t, Color.lerp),
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t),
+      checkColor: WidgetStateProperty.lerp<Color?>(
+          checkColor, other.checkColor, t, Color.lerp),
+      uncheckColor: WidgetStateProperty.lerp<Color?>(
+          uncheckColor, other.uncheckColor, t, Color.lerp),
     );
   }
 }

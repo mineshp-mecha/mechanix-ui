@@ -9,6 +9,8 @@ class MechanixSimpleListThemeData
   const MechanixSimpleListThemeData({
     this.backgroundColor,
     this.widgetRadius = const BorderRadius.all(Radius.circular(4)),
+    this.widgetMargin = const EdgeInsets.only(bottom: 40),
+    this.itemRadius,
     this.dividerThickness = 1,
     this.dividerHeight = 1,
     this.dividerColor,
@@ -27,14 +29,20 @@ class MechanixSimpleListThemeData
 
   final EdgeInsets? itemPadding;
 
+  final EdgeInsets? widgetMargin;
+
+  final BorderRadius? itemRadius;
+
   @override
   MechanixSimpleListThemeData copyWith({
     Color? backgroundColor,
     BorderRadius? widgetRadius,
+    BorderRadius? itemRadius,
     double? dividerThickness,
     double? dividerHeight,
     Color? dividerColor,
     EdgeInsets? itemPadding,
+    EdgeInsets? widgetMargin,
   }) {
     return MechanixSimpleListThemeData(
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -43,6 +51,8 @@ class MechanixSimpleListThemeData
       dividerHeight: dividerHeight ?? this.dividerHeight,
       dividerColor: dividerColor ?? this.dividerColor,
       itemPadding: itemPadding ?? this.itemPadding,
+      widgetMargin: widgetMargin ?? this.widgetMargin,
+      itemRadius: itemRadius ?? this.itemRadius,
     );
   }
 
@@ -57,6 +67,8 @@ class MechanixSimpleListThemeData
       dividerThickness: lerpDouble(dividerThickness, o?.dividerThickness, t),
       dividerHeight: lerpDouble(dividerHeight, o?.dividerHeight, t),
       itemPadding: EdgeInsets.lerp(itemPadding, o?.itemPadding, t),
+      widgetMargin: EdgeInsets.lerp(widgetMargin, o?.widgetMargin, t),
+      itemRadius: BorderRadius.lerp(itemRadius, o?.itemRadius, t),
     );
   }
 
@@ -70,6 +82,8 @@ class MechanixSimpleListThemeData
     properties.add(DiagnosticsProperty('dividerThickness', dividerThickness));
     properties.add(DiagnosticsProperty('dividerHeight', dividerHeight));
     properties.add(DiagnosticsProperty('itemPadding', itemPadding));
+    properties.add(DiagnosticsProperty('widgetMargin', widgetMargin));
+    properties.add(DiagnosticsProperty('itemRadius', itemRadius));
   }
 
   @override
@@ -81,19 +95,15 @@ class MechanixSimpleListThemeData
         widgetRadius == other.widgetRadius &&
         dividerThickness == other.dividerThickness &&
         dividerHeight == other.dividerHeight &&
+        widgetMargin == other.widgetMargin &&
+        itemRadius == other.itemRadius &&
         itemPadding == other.itemPadding;
   }
 
   @override
   int get hashCode {
-    return Object.hash(
-      backgroundColor,
-      dividerColor,
-      widgetRadius,
-      dividerThickness,
-      dividerHeight,
-      itemPadding,
-    );
+    return Object.hash(backgroundColor, dividerColor, widgetRadius,
+        dividerThickness, dividerHeight, widgetMargin, itemPadding, itemRadius);
   }
 }
 
