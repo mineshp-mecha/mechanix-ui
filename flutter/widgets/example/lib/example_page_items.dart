@@ -6,6 +6,7 @@ import 'package:widgets_example/pages/floating_action_button_page.dart';
 import 'package:widgets_example/pages/icon_widget_page.dart';
 import 'package:widgets_example/pages/list_page.dart';
 import 'package:widgets_example/pages/navigation_page.dart';
+import 'package:widgets_example/pages/popup_menu_page.dart';
 import 'package:widgets_example/pages/section_list_page.dart';
 import 'package:widgets_example/pages/select_page.dart';
 import 'package:widgets_example/pages/simple_list_page.dart';
@@ -97,6 +98,10 @@ final examplePageItems = <PageItem>[
       pageBuilder: (context) => const SelectPage(),
       iconBuilder: (context, selected) =>
           const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'MechanixMenu',
+      pageBuilder: (context) => const PopupMenuPage(),
+      iconBuilder: (context, selected) => const Icon(Icons.menu)),
   PageItem(
       title: 'MechanixWheelScroll',
       pageBuilder: (context) => const WheelScrollPage(),
