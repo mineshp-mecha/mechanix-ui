@@ -3,6 +3,7 @@ import 'package:widgets/widgets.dart';
 import 'package:widgets/widgets/bottomSheetModals/mechanix_bottom_sheet_theme.dart';
 import 'package:widgets/widgets/listItems/mechanix_simple_list_theme.dart';
 import 'package:widgets/widgets/listItems/simple_list_items_type.dart';
+import 'package:widgets/widgets/textInput/mechanix_text_input_theme.dart';
 
 class BottomSheetPage extends StatelessWidget {
   const BottomSheetPage({super.key});
@@ -224,72 +225,77 @@ class TextInputSheetContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Text(
-          "Enter Your Name",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            color: Colors.white,
+    return MechanixTextInputTheme(
+      style: MechanixTextInputThemeData(
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text(
+            "Enter Your Name",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Colors.white,
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: MechanixTextInput<String>.textInput(
-                hintText: "Your name",
-                onChanged: (value) {
-                  debugPrint("Name changed: $value");
-                },
-                onFieldSubmitted: (value) {
-                  debugPrint("Field submitted: $value");
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
-            const SizedBox(width: 12),
-            SizedBox(
-              width: 48, // Set width and height to the same value
-              height: 48,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey[700],
-                  foregroundColor: Colors.white,
-                  shape:
-                      const CircleBorder(), // Use CircleBorder for perfect circle
-                  padding: EdgeInsets.zero,
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child: MechanixTextInput<String>.textInput(
+                  hintText: "Your name",
+                  onChanged: (value) {
+                    debugPrint("Name changed: $value");
+                  },
+                  onFieldSubmitted: (value) {
+                    debugPrint("Field submitted: $value");
+                    Navigator.of(context).pop();
+                  },
                 ),
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Icon(Icons.close),
               ),
-            ),
-            const SizedBox(width: 12),
-            SizedBox(
-              width: 48, // Set width and height to the same value
-              height: 48,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                  shape:
-                      const CircleBorder(), // Use CircleBorder for perfect circle
-                  padding: EdgeInsets.zero,
+              const SizedBox(width: 12),
+              SizedBox(
+                width: 48, // Set width and height to the same value
+                height: 48,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[700],
+                    foregroundColor: Colors.white,
+                    shape:
+                        const CircleBorder(), // Use CircleBorder for perfect circle
+                    padding: EdgeInsets.zero,
+                  ),
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Icon(Icons.close),
                 ),
-                onPressed: () {
-                  debugPrint("Submit pressed");
-                  Navigator.of(context).pop();
-                },
-                child: const Icon(Icons.check),
               ),
-            ),
-          ],
-        ),
-      ],
+              const SizedBox(width: 12),
+              SizedBox(
+                width: 48, // Set width and height to the same value
+                height: 48,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    shape:
+                        const CircleBorder(), // Use CircleBorder for perfect circle
+                    padding: EdgeInsets.zero,
+                  ),
+                  onPressed: () {
+                    debugPrint("Submit pressed");
+                    Navigator.of(context).pop();
+                  },
+                  child: const Icon(Icons.check),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
