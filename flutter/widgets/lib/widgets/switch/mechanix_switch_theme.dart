@@ -233,17 +233,17 @@ class MechanixSwitchStyle with Diagnosticable {
     // Create defaults based on current theme
     final defaultStyle = MechanixSwitchStyle(
       // Use theme colors as defaults
-      activeTrackColor: colorScheme.primary,
-      inactiveTrackColor: colorScheme.surface,
-      activeThumbColor: colorScheme.onPrimary,
+      activeTrackColor: colorScheme.surface,
+      inactiveTrackColor: colorScheme.primary,
+      activeThumbColor: colorScheme.primary,
 
       inactiveThumbColor: colorScheme.onSurface.withValues(alpha: 0.6),
       activeTextStyle: textTheme.labelMedium?.copyWith(
-        color: colorScheme.onPrimary,
+        // color: colorScheme.onPrimary,
         fontWeight: FontWeight.w600,
       ),
       inactiveTextStyle: textTheme.labelMedium?.copyWith(
-        color: colorScheme.onSurface.withValues(alpha: 0.6),
+        // color: colorScheme.onSurface.withValues(alpha: 0.6),
         fontWeight: FontWeight.w600,
       ),
       trackShadow: [

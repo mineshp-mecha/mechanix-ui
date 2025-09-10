@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widgets/extensions/theme_extension.dart';
 import 'package:widgets/mechanix.dart';
 import 'package:widgets/widgets/listItems/mechanix_simple_list_theme.dart';
 import 'package:widgets/widgets/listItems/simple_list_items_type.dart';
@@ -11,6 +12,7 @@ class MechanixSimpleList extends StatelessWidget {
     this.padding,
     this.physics,
     this.controller,
+    this.theme,
     required this.listItems,
   })  : itemBuilder = null,
         itemCount = null,
@@ -24,6 +26,7 @@ class MechanixSimpleList extends StatelessWidget {
     this.divider,
     this.padding,
     this.physics,
+    this.theme,
     this.controller,
   })  : listItems = const [],
         separatorBuilder = null;
@@ -34,6 +37,7 @@ class MechanixSimpleList extends StatelessWidget {
     required this.separatorBuilder,
     this.padding,
     this.physics,
+    this.theme,
     this.controller,
   })  : isDividerRequired = false,
         divider = null,
@@ -54,9 +58,11 @@ class MechanixSimpleList extends StatelessWidget {
 
   final int? itemCount;
 
-  final Widget? Function(BuildContext, int)? itemBuilder;
+  final MechanixSimpleListThemeData? theme;
 
-  final Widget Function(BuildContext, int)? separatorBuilder;
+  final Widget? Function(BuildContext context, int index)? itemBuilder;
+
+  final Widget Function(BuildContext context, int index)? separatorBuilder;
 
   Widget _buildDefaultSeparator(BuildContext context, int index) {
     final theme = MechanixSimpleListTheme.of(context);
@@ -67,8 +73,8 @@ class MechanixSimpleList extends StatelessWidget {
     return Divider(
       thickness: theme.dividerThickness,
       height: theme.dividerHeight,
-      color: theme.dividerColor ?? Theme.of(context).dividerColor,
-    );
+      color: theme.dividerColor ?? context.colorScheme.outline,
+    ).padHorizontal(16);
   }
 
   Widget _buildListView({
@@ -85,7 +91,7 @@ class MechanixSimpleList extends StatelessWidget {
         itemCount: listItems.length,
         itemBuilder: itemBuilder ??
             (context, index) =>
-                _buildListItem(context, listItems[index], theme),
+                _buildListItem(context, listItems[index], theme, index),
         separatorBuilder: separatorBuilder!,
       );
     } else if (themeRequiresDivider) {
@@ -96,7 +102,7 @@ class MechanixSimpleList extends StatelessWidget {
         itemCount: itemCount ?? listItems.length,
         itemBuilder: itemBuilder ??
             (context, index) =>
-                _buildListItem(context, listItems[index], theme),
+                _buildListItem(context, listItems[index], theme, index),
         separatorBuilder: _buildDefaultSeparator,
       );
     } else {
@@ -104,16 +110,17 @@ class MechanixSimpleList extends StatelessWidget {
         shrinkWrap: true,
         physics: physics,
         controller: controller,
-        itemCount: listItems.length,
+        itemCount: itemCount ?? listItems.length,
         itemBuilder: itemBuilder ??
             (context, index) =>
-                _buildListItem(context, listItems[index], theme),
+                _buildListItem(context, listItems[index], theme, index),
       );
     }
   }
 
   Widget _buildListItem(BuildContext context, SimpleListItems item,
-      MechanixSimpleListThemeData theme) {
+      MechanixSimpleListThemeData theme, int index) {
+    final itemTheme = MechanixSimpleListTheme.of(context);
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: item.onTap,
@@ -122,6 +129,14 @@ class MechanixSimpleList extends StatelessWidget {
       onDoubleTap: item.onDoubleTap,
       child: Container(
         padding: theme.itemPadding,
+        decoration: BoxDecoration(
+            // color: itemTheme.backgroundColor ?? context.colorScheme.secondary,
+            borderRadius: itemTheme.itemRadius ??
+                (index == 0
+                    ? CircularRadius.topAll(4)
+                    : index == (listItems.length - 1)
+                        ? CircularRadius.bottomAll(4)
+                        : BorderRadius.zero)),
         child: Column(
           children: [
             Row(
@@ -148,13 +163,15 @@ class MechanixSimpleList extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    final itemTheme = MechanixSimpleListTheme.of(context);
+    // final itemTheme = MechanixSimpleListTheme.of(context);
+    final itemTheme = MechanixSimpleListTheme.of(context).merge(theme);
     final bool useSeparator = separatorBuilder != null;
     final bool themeRequiresDivider = isDividerRequired && !useSeparator;
 
     return Padding(
       padding: padding ?? EdgeInsets.zero,
       child: Container(
+        margin: itemTheme.widgetMargin,
         decoration: BoxDecoration(
           borderRadius: itemTheme.widgetRadius,
           color: itemTheme.backgroundColor ?? context.colorScheme.secondary,

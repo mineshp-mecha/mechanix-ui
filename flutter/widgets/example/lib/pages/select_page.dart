@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:widgets/mechanix.dart';
 import 'package:widgets/widgets/select/select_type.dart';
 
+enum DisplayScreenOffTime {
+  tenSeconds,
+  thirtySeconds,
+  sixtySeconds,
+  fiveMinutes,
+  never
+}
+
 class SelectPage extends StatefulWidget {
   const SelectPage({super.key});
 
@@ -10,29 +18,43 @@ class SelectPage extends StatefulWidget {
 }
 
 class _SelectPageState extends State<SelectPage> {
-  String selectValue = '';
+  DisplayScreenOffTime? _selectedTime;
 
-  void onChanged(SelectOption option) {
-    setState(() {
-      selectValue = option.value;
-    });
-  }
+  final List<SelectOption<DisplayScreenOffTime>> _timeOptions = [
+    DisplayScreenOffTime.tenSeconds.toSelectOption('10 seconds'),
+    DisplayScreenOffTime.thirtySeconds.toSelectOption('30 seconds'),
+    DisplayScreenOffTime.sixtySeconds
+        .toSelectOption('1 minute', leading: Icon(Icons.abc)),
+    DisplayScreenOffTime.fiveMinutes.toSelectOption('5 minutes'),
+    DisplayScreenOffTime.never.toSelectOption('Never turn off'),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Screen timeout',
-          style: Theme.of(context).textTheme.labelMedium,
+    return Scaffold(
+      appBar: AppBar(title: const Text('Screen Settings')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Screen timeout',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            MechanixSelect<DisplayScreenOffTime>(
+              options: _timeOptions,
+              value: _selectedTime,
+              onChanged: (selected) {
+                setState(() {
+                  _selectedTime = selected.value;
+                });
+              },
+            ),
+          ],
         ),
-        const SizedBox(height: 8),
-        MechanixSelect(options: [
-          SelectOption(value: 'Automatic', label: 'AUTOMATIC'),
-          SelectOption(value: 'Static', label: 'STATIC')
-        ], onChanged: onChanged, selectValue: selectValue)
-      ],
+      ),
     );
   }
 }
