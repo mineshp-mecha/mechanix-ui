@@ -92,10 +92,20 @@ class MechanixSectionList extends StatelessWidget {
               ],
             ),
             if (item.defaultTrailing && item.trailing == null)
-              IconWidget(
-                iconWidth: 10,
-                iconHeight: 17,
-                iconPath: MechanixIconImages.rightCaret,
+              SizedBox(
+                height: 24,
+                width: 24,
+                child: FittedBox(
+                  fit: BoxFit.none,
+                  child: SizedBox(
+                    width: 10,
+                    height: 17,
+                    child: Image.asset(
+                      MechanixIconImages.rightCaret,
+                      package: 'widgets',
+                    ),
+                  ),
+                ),
               )
             else if (item.trailing != null)
               item.trailing!,

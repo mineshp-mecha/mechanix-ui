@@ -8,7 +8,7 @@ class NavigationSecondPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: MechanixNavigationBar(
-          titleText: "Back ",
+          title: "Back ",
         ),
         body: Padding(
           padding: EdgeInsets.all(20),
