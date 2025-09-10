@@ -24,3 +24,5 @@ export 'widgets/select/select.dart';
 export 'widgets/theme/theme_toggle.dart';
 export 'widgets/theme/theme_toggle_button.dart';
 export 'widgets/theme/variant_picker.dart';
+export 'widgets/bottomSheetModals/mechanix_bottom_sheet.dart';
+export 'widgets/textInput/text_input.dart';
