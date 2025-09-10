@@ -30,6 +30,8 @@ ThemeData createDarkTheme(
     brightness: Brightness.dark,
     primary: Color(0xFF2D8AFF),
     secondary: Color(0xFF2B2B2B),
+    outline: Color(0xFF464646),
+    outlineVariant: Color(0xFF575757),
     onSurface: Color(0xFFF0F0F0),
     surfaceDim: Color(0xFF989898),
   );

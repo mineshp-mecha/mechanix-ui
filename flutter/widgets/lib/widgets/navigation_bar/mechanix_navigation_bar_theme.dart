@@ -6,29 +6,30 @@ import 'package:flutter/material.dart';
 @immutable
 class MechanixNavigationBarThemeData
     extends ThemeExtension<MechanixNavigationBarThemeData> with Diagnosticable {
-  const MechanixNavigationBarThemeData({
-    this.centerTitle = false,
-    this.automaticallyImplyLeading = true,
-    this.leadingWidth,
-    this.height,
-    this.titleTextStyle,
-    this.backgroundColor,
-    this.foregroundColor,
-    this.elevation,
-    this.actionsIconTheme,
-    this.titleSpacing,
-  });
+  const MechanixNavigationBarThemeData(
+      {this.centerTitle = false,
+      this.automaticallyImplyLeading = true,
+      this.leadingWidth,
+      this.height,
+      this.titleStyle,
+      this.backgroundColor,
+      this.foregroundColor,
+      this.elevation,
+      this.actionsIconTheme,
+      this.titleSpacing,
+      this.scrolledUnderElevation});
 
   final bool? centerTitle;
   final bool automaticallyImplyLeading;
   final double? leadingWidth;
   final double? height;
-  final TextStyle? titleTextStyle;
+  final TextStyle? titleStyle;
   final Color? backgroundColor;
   final Color? foregroundColor;
   final double? elevation;
   final IconThemeData? actionsIconTheme;
   final double? titleSpacing;
+  final double? scrolledUnderElevation;
 
   @override
   MechanixNavigationBarThemeData copyWith({
@@ -36,20 +37,23 @@ class MechanixNavigationBarThemeData
     bool? automaticallyImplyLeading,
     double? leadingWidth,
     double? height,
-    TextStyle? titleTextStyle,
+    TextStyle? titleStyle,
     Color? backgroundColor,
     Color? foregroundColor,
     double? elevation,
     IconThemeData? actionsIconTheme,
     double? titleSpacing,
+    double? scrolledUnderElevation,
   }) {
     return MechanixNavigationBarThemeData(
       centerTitle: centerTitle ?? this.centerTitle,
+      scrolledUnderElevation:
+          scrolledUnderElevation ?? this.scrolledUnderElevation,
       automaticallyImplyLeading:
           automaticallyImplyLeading ?? this.automaticallyImplyLeading,
       leadingWidth: leadingWidth ?? this.leadingWidth,
       height: height ?? this.height,
-      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+      titleStyle: titleStyle ?? this.titleStyle,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       foregroundColor: foregroundColor ?? this.foregroundColor,
       elevation: elevation ?? this.elevation,
@@ -63,20 +67,23 @@ class MechanixNavigationBarThemeData
     bool? automaticallyImplyLeading,
     double? leadingWidth,
     double? height,
-    TextStyle? titleTextStyle,
+    TextStyle? titleStyle,
     Color? backgroundColor,
     Color? foregroundColor,
     double? elevation,
     IconThemeData? actionsIconTheme,
     double? titleSpacing,
+    double? scrolledUnderElevation,
   }) {
     return copyWith(
       centerTitle: centerTitle ?? this.centerTitle,
+      scrolledUnderElevation:
+          scrolledUnderElevation ?? this.scrolledUnderElevation,
       automaticallyImplyLeading:
           automaticallyImplyLeading ?? this.automaticallyImplyLeading,
       leadingWidth: leadingWidth ?? this.leadingWidth,
       height: height ?? this.height,
-      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+      titleStyle: titleStyle ?? this.titleStyle,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       foregroundColor: foregroundColor ?? this.foregroundColor,
       elevation: elevation ?? this.elevation,
@@ -95,11 +102,13 @@ class MechanixNavigationBarThemeData
 
     return MechanixNavigationBarThemeData(
       centerTitle: t < 0.5 ? centerTitle : o.centerTitle,
+      scrolledUnderElevation:
+          lerpDouble(scrolledUnderElevation, o.scrolledUnderElevation, t),
       automaticallyImplyLeading:
           t < 0.5 ? automaticallyImplyLeading : o.automaticallyImplyLeading,
       leadingWidth: lerpDouble(leadingWidth, o.leadingWidth, t),
       height: lerpDouble(height, o.height, t),
-      titleTextStyle: TextStyle.lerp(titleTextStyle, o.titleTextStyle, t),
+      titleStyle: TextStyle.lerp(titleStyle, o.titleStyle, t),
       backgroundColor: Color.lerp(backgroundColor, o.backgroundColor, t),
       foregroundColor: Color.lerp(foregroundColor, o.foregroundColor, t),
       elevation: lerpDouble(elevation, o.elevation, t),
@@ -128,11 +137,12 @@ class MechanixNavigationBarThemeData
     ));
     properties.add(DoubleProperty('leadingWidth', leadingWidth));
     properties.add(DoubleProperty('titleSpacing', titleSpacing));
-    properties
-        .add(DiagnosticsProperty<TextStyle?>('titleTextStyle', titleTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle?>('titleStyle', titleStyle));
     properties.add(ColorProperty('backgroundColor', backgroundColor));
     properties.add(ColorProperty('foregroundColor', foregroundColor));
     properties.add(DoubleProperty('elevation', elevation));
+    properties
+        .add(DoubleProperty('scrolledUnderElevation', scrolledUnderElevation));
     properties.add(DiagnosticsProperty<IconThemeData?>(
         'actionsIconTheme', actionsIconTheme));
   }
@@ -145,28 +155,29 @@ class MechanixNavigationBarThemeData
         other.automaticallyImplyLeading == automaticallyImplyLeading &&
         other.centerTitle == centerTitle &&
         other.titleSpacing == titleSpacing &&
-        other.titleTextStyle == titleTextStyle &&
+        other.titleStyle == titleStyle &&
         other.leadingWidth == leadingWidth &&
         other.backgroundColor == backgroundColor &&
         other.foregroundColor == foregroundColor &&
         other.elevation == elevation &&
+        other.scrolledUnderElevation == scrolledUnderElevation &&
         other.actionsIconTheme == actionsIconTheme;
   }
 
   @override
   int get hashCode {
     return Object.hash(
-      height,
-      automaticallyImplyLeading,
-      centerTitle,
-      titleSpacing,
-      titleTextStyle,
-      leadingWidth,
-      backgroundColor,
-      foregroundColor,
-      elevation,
-      actionsIconTheme,
-    );
+        height,
+        automaticallyImplyLeading,
+        centerTitle,
+        titleSpacing,
+        titleStyle,
+        leadingWidth,
+        backgroundColor,
+        foregroundColor,
+        elevation,
+        actionsIconTheme,
+        scrolledUnderElevation);
   }
 }
 

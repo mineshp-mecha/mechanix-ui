@@ -8,7 +8,7 @@ class NavigationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: MechanixNavigationBar(
-          titleText: "Home Page",
+          title: "Home Page",
           height: 50,
           backgroundColor: Colors.red,
           elevation: 20,
