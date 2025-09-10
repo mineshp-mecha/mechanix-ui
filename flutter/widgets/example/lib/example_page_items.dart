@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:widgets_example/pages/alerts_page.dart';
+import 'package:widgets_example/pages/bottom_sheet_page.dart';
 import 'package:widgets_example/pages/buttons_page.dart';
 import 'package:widgets_example/pages/floating_action_button_page.dart';
 import 'package:widgets_example/pages/icon_widget_page.dart';
@@ -112,4 +113,9 @@ final examplePageItems = <PageItem>[
       pageBuilder: (context) => const MechanixTextInputPage(),
       iconBuilder: (context, selected) =>
           const Icon(Icons.smart_screen_rounded)),
+  PageItem(
+      title: 'MechanixBottomSheet',
+      pageBuilder: (context) => const BottomSheetPage(),
+      iconBuilder: (context, selected) =>
+          const Icon(Icons.border_top_outlined)),
 ].sortedBy((page) => page.title);
