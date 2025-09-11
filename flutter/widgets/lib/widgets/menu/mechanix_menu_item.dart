@@ -52,7 +52,6 @@ class _MechanixMenuItemState extends State<MechanixMenuItem> {
 
     final resolvedPadding = widget.itemPadding ??
         const EdgeInsets.symmetric(horizontal: 16, vertical: 12);
-    debugPrint('resolvedPadding: $resolvedPadding');
 
     final resolvedTextStyle = widget.textStyle ??
         theme.textStyle ??
