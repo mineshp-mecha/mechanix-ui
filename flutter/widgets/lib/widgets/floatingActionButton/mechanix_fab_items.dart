@@ -6,7 +6,7 @@ class MechanixFabItem {
   final IconData? icon;
   final String? iconPath;
   final String? label;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final Color? backgroundColor;
   final Color? iconColor;
   final double? iconSize;
@@ -17,7 +17,7 @@ class MechanixFabItem {
   const MechanixFabItem({
     required this.icon,
     this.label,
-    required this.onTap,
+    this.onTap,
     this.backgroundColor,
     this.iconColor,
     this.iconSize,
@@ -28,7 +28,7 @@ class MechanixFabItem {
   const MechanixFabItem.fromImage({
     required this.iconPath,
     this.label,
-    required this.onTap,
+    this.onTap,
     this.backgroundColor,
     this.iconColor,
     this.iconSize,
@@ -52,6 +52,7 @@ class MechanixFabItem {
               iconPath!,
               height: resolvedIconSize,
               width: resolvedIconSize,
+              color: resolvedIconColor,
             )
           : Icon(
               icon,
