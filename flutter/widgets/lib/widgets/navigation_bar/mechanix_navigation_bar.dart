@@ -5,7 +5,7 @@ import 'mechanix_navigation_bar_theme.dart';
 
 class MechanixNavigationBar extends StatelessWidget
     implements PreferredSizeWidget {
-  final String? titleText;
+  final String? title;
   final Widget? leadingWidget;
   final Widget? backIcon;
   final List<Widget>? actionWidgets;
@@ -14,7 +14,7 @@ class MechanixNavigationBar extends StatelessWidget
   final bool? automaticallyImplyLeading;
   final double? leadingWidth;
   final double? height;
-  final TextStyle? titleTextStyle;
+  final TextStyle? titleStyle;
   final Color? backgroundColor;
   final Color? foregroundColor;
   final double? elevation;
@@ -25,11 +25,11 @@ class MechanixNavigationBar extends StatelessWidget
   const MechanixNavigationBar(
       {super.key,
       this.backIcon,
-      this.titleText,
+      this.title,
       this.height,
       this.automaticallyImplyLeading,
       this.centerTitle,
-      this.titleTextStyle,
+      this.titleStyle,
       this.leadingWidget,
       this.leadingWidth,
       this.titleSpacing,
@@ -77,10 +77,10 @@ class MechanixNavigationBar extends StatelessWidget
       fontSize: 18,
     );
 
-    final themedTitleStyle = barTheme.titleTextStyle;
+    final themedTitleStyle = barTheme.titleStyle;
 
-    final resolvedTitleTextStyle =
-        defaultTitleStyle.merge(themedTitleStyle).merge(titleTextStyle);
+    final resolvedtitleStyle =
+        defaultTitleStyle.merge(themedTitleStyle).merge(titleStyle);
 
     return AppBar(
       toolbarHeight: resolvedHeight,
@@ -112,10 +112,10 @@ class MechanixNavigationBar extends StatelessWidget
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (titleText != null)
+          if (title != null)
             Text(
-              titleText ?? '',
-              style: resolvedTitleTextStyle,
+              title ?? '',
+              style: resolvedtitleStyle,
             )
         ],
       ),

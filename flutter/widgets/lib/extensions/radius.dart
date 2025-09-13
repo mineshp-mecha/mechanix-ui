@@ -16,6 +16,14 @@ extension CircularRadius on BorderRadius {
 
   static BorderRadius all([double radius = mechanixRadius]) =>
       BorderRadius.circular(radius);
+
+  static BorderRadius topAll([double radius = mechanixRadius]) =>
+      BorderRadius.vertical(
+          top: Radius.circular(radius), bottom: Radius.circular(0));
+
+  static BorderRadius bottomAll([double radius = mechanixRadius]) =>
+      BorderRadius.vertical(
+          top: Radius.circular(0), bottom: Radius.circular(radius));
 }
 
 extension HorizontalRadius on BorderRadius {
@@ -49,7 +57,7 @@ extension HorizontalRadius on BorderRadius {
 }
 
 extension VerticalRadius on BorderRadius {
-  static BorderRadius only(
+  static BorderRadius onlyElliptical(
           {double topX = 0,
           double topY = 0,
           double bottomX = 0,
@@ -57,6 +65,10 @@ extension VerticalRadius on BorderRadius {
       BorderRadius.vertical(
           top: Radius.elliptical(topX, topY),
           bottom: Radius.elliptical(bottomX, bottomY));
+
+  static BorderRadius onlyCircular({double top = 0, double bottom = 0}) =>
+      BorderRadius.vertical(
+          top: Radius.circular(top), bottom: Radius.circular(bottom));
 
   static BorderRadius top(
           {double x = mechanixRadius, double y = mechanixRadius}) =>

@@ -11,7 +11,7 @@ class MechanixNavigationBarThemeData
       this.automaticallyImplyLeading = true,
       this.leadingWidth,
       this.height,
-      this.titleTextStyle,
+      this.titleStyle,
       this.backgroundColor,
       this.foregroundColor,
       this.elevation,
@@ -23,7 +23,7 @@ class MechanixNavigationBarThemeData
   final bool automaticallyImplyLeading;
   final double? leadingWidth;
   final double? height;
-  final TextStyle? titleTextStyle;
+  final TextStyle? titleStyle;
   final Color? backgroundColor;
   final Color? foregroundColor;
   final double? elevation;
@@ -37,7 +37,7 @@ class MechanixNavigationBarThemeData
     bool? automaticallyImplyLeading,
     double? leadingWidth,
     double? height,
-    TextStyle? titleTextStyle,
+    TextStyle? titleStyle,
     Color? backgroundColor,
     Color? foregroundColor,
     double? elevation,
@@ -53,7 +53,7 @@ class MechanixNavigationBarThemeData
           automaticallyImplyLeading ?? this.automaticallyImplyLeading,
       leadingWidth: leadingWidth ?? this.leadingWidth,
       height: height ?? this.height,
-      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+      titleStyle: titleStyle ?? this.titleStyle,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       foregroundColor: foregroundColor ?? this.foregroundColor,
       elevation: elevation ?? this.elevation,
@@ -67,7 +67,7 @@ class MechanixNavigationBarThemeData
     bool? automaticallyImplyLeading,
     double? leadingWidth,
     double? height,
-    TextStyle? titleTextStyle,
+    TextStyle? titleStyle,
     Color? backgroundColor,
     Color? foregroundColor,
     double? elevation,
@@ -83,7 +83,7 @@ class MechanixNavigationBarThemeData
           automaticallyImplyLeading ?? this.automaticallyImplyLeading,
       leadingWidth: leadingWidth ?? this.leadingWidth,
       height: height ?? this.height,
-      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+      titleStyle: titleStyle ?? this.titleStyle,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       foregroundColor: foregroundColor ?? this.foregroundColor,
       elevation: elevation ?? this.elevation,
@@ -108,7 +108,7 @@ class MechanixNavigationBarThemeData
           t < 0.5 ? automaticallyImplyLeading : o.automaticallyImplyLeading,
       leadingWidth: lerpDouble(leadingWidth, o.leadingWidth, t),
       height: lerpDouble(height, o.height, t),
-      titleTextStyle: TextStyle.lerp(titleTextStyle, o.titleTextStyle, t),
+      titleStyle: TextStyle.lerp(titleStyle, o.titleStyle, t),
       backgroundColor: Color.lerp(backgroundColor, o.backgroundColor, t),
       foregroundColor: Color.lerp(foregroundColor, o.foregroundColor, t),
       elevation: lerpDouble(elevation, o.elevation, t),
@@ -137,8 +137,7 @@ class MechanixNavigationBarThemeData
     ));
     properties.add(DoubleProperty('leadingWidth', leadingWidth));
     properties.add(DoubleProperty('titleSpacing', titleSpacing));
-    properties
-        .add(DiagnosticsProperty<TextStyle?>('titleTextStyle', titleTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle?>('titleStyle', titleStyle));
     properties.add(ColorProperty('backgroundColor', backgroundColor));
     properties.add(ColorProperty('foregroundColor', foregroundColor));
     properties.add(DoubleProperty('elevation', elevation));
@@ -156,7 +155,7 @@ class MechanixNavigationBarThemeData
         other.automaticallyImplyLeading == automaticallyImplyLeading &&
         other.centerTitle == centerTitle &&
         other.titleSpacing == titleSpacing &&
-        other.titleTextStyle == titleTextStyle &&
+        other.titleStyle == titleStyle &&
         other.leadingWidth == leadingWidth &&
         other.backgroundColor == backgroundColor &&
         other.foregroundColor == foregroundColor &&
@@ -172,7 +171,7 @@ class MechanixNavigationBarThemeData
         automaticallyImplyLeading,
         centerTitle,
         titleSpacing,
-        titleTextStyle,
+        titleStyle,
         leadingWidth,
         backgroundColor,
         foregroundColor,

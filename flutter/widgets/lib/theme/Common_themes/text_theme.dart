@@ -50,8 +50,8 @@ TextTheme createTextTheme({required onSurface, required Color surfaceDim}) {
     ),
     titleMedium: TextStyle(
       color: onSurface,
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
       fontFamily: 'Inter',
       package: 'widgets',
     ),
@@ -94,8 +94,8 @@ TextTheme createTextTheme({required onSurface, required Color surfaceDim}) {
       package: 'widgets',
     ), // settings section list menu label
     labelSmall: TextStyle(
-      color: onSurface,
-      fontSize: 11,
+      fontWeight: FontWeight.w400,
+      fontSize: 16,
       fontFamily: 'Inter',
       package: 'widgets',
     ),
